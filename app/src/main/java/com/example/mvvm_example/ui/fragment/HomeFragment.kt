@@ -26,6 +26,8 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+
+
     lateinit var peopleAndRooms : TextInputEditText
     lateinit var dateRange : TextInputEditText
     lateinit var searchTravel : TextInputEditText
