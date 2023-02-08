@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "947786394792",
+    "project_id": "mvvm-travel",
+    "storage_bucket": "mvvm-travel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947786394792:android:d1273e4a2f5bc5be5f269d",
+        "android_client_info": {
+          "package_name": "com.example.mvvm_example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947786394792-mn90ar31g72hve5ok3htd8al5hcq4tp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUy91-LOR7MqRKK6ZuEs87Oz8GAIC6YVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947786394792-mn90ar31g72hve5ok3htd8al5hcq4tp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
