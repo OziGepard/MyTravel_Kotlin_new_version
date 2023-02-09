@@ -22,23 +22,23 @@ import java.util.Calendar
 
 class HomeFragment : Fragment() {
 
-    private val TAG = "HomeFragment"
+    private val TAG = "_HomeFragment"
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
 
 
-    lateinit var peopleAndRooms : TextInputEditText
-    lateinit var dateRange : TextInputEditText
-    lateinit var searchTravel : TextInputEditText
+    private lateinit var peopleAndRooms : TextInputEditText
+    private lateinit var dateRange : TextInputEditText
+    private lateinit var searchTravel : TextInputEditText
     private val calendar: Calendar = Calendar.getInstance()
 
     private val navOptions : NavOptions by lazy {
         NavOptions.Builder()
+            .setExitAnim(R.anim.from_right_to_left_faster)
             .setEnterAnim(R.anim.from_right_to_left)
-            .setExitAnim(R.anim.from_left_to_right)
-            .setPopEnterAnim(R.anim.from_right_to_left)
-            .setPopExitAnim(R.anim.from_left_to_right)
+            .setPopEnterAnim(R.anim.from_left_to_right_pop)
+            .setPopExitAnim(R.anim.from_left_to_right_pop_faster)
             .build()
     }
 
