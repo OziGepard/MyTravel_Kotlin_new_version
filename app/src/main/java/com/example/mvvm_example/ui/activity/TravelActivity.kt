@@ -42,8 +42,8 @@ class TravelActivity : AppCompatActivity() {
 
 //        val recyclerView = findViewById<RecyclerView>(R.id.travel_recyclerview)
 //        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-
+//
+//
 //        val factory = InjectorUtils.provideTravelViewModelFactory()
 //        val viewModel = ViewModelProvider(this, factory)
 //            .get(TravelViewModel::class.java)
