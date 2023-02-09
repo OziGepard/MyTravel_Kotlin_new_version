@@ -13,6 +13,7 @@ import android.view.Window
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.mvvm_example.R
+import com.example.mvvm_example.data.HomeFragmentFunctions
 import com.example.mvvm_example.databinding.FragmentHomeBinding
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
@@ -20,27 +21,14 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import java.util.Calendar
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeFragmentFunctions {
 
-    private val TAG = "_HomeFragment"
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
-
 
     private lateinit var peopleAndRooms : TextInputEditText
     private lateinit var dateRange : TextInputEditText
     private lateinit var searchTravel : TextInputEditText
-    private val calendar: Calendar = Calendar.getInstance()
-
-    private val navOptions : NavOptions by lazy {
-        NavOptions.Builder()
-            .setExitAnim(R.anim.from_right_to_left_faster)
-            .setEnterAnim(R.anim.from_right_to_left)
-            .setPopEnterAnim(R.anim.from_left_to_right_pop)
-            .setPopExitAnim(R.anim.from_left_to_right_pop_faster)
-            .build()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,59 +50,16 @@ class HomeFragment : Fragment() {
         searchTravel = binding.searchTravel
 
         searchTravel.setOnClickListener{
-            showSearchFragment()
+            showSearchFragment(activity)
         }
 
         dateRange.setOnClickListener{
-            showDateRangeDialog()
+            showDateRangeDialog(parentFragmentManager)
         }
 
         peopleAndRooms.setOnClickListener{
-            showPeopleAndRoomsDialog()
+            showPeopleAndRoomsDialog(context)
         }
-    }
-
-    private fun showSearchFragment() {
-        val navHostFragment = activity?.supportFragmentManager?.findFragmentById(R.id.fragment)
-        val navController = navHostFragment?.findNavController()
-
-        navController?.navigate(R.id.searchFragment,
-        null,
-        navOptions,
-        null)
-    }
-
-    private fun showDateRangeDialog() {
-        val startFrom = calendar.timeInMillis
-        val constraints = CalendarConstraints.Builder()
-            .setValidator(DateValidatorPointForward.now())
-            .setStart(startFrom)
-            .build()
-
-        val dateRangePicker = MaterialDatePicker.Builder.dateRangePicker()
-            .setTitleText("Podaj datę wyjazdu")
-            .setCalendarConstraints(constraints)
-            .build()
-
-        dateRangePicker.show(
-            parentFragmentManager,
-            "DATE PICKER"
-        )
-    }
-
-    private fun showPeopleAndRoomsDialog() {
-        val bottomSheetDialog = context?.let { Dialog(it) } ?: return
-
-        bottomSheetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        bottomSheetDialog.setContentView(R.layout.main_bottom_sheet_people)
-
-        bottomSheetDialog.show()
-        bottomSheetDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        bottomSheetDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        bottomSheetDialog.window?.attributes?.windowAnimations = R.style.BottomSheetAnimation
-        bottomSheetDialog.window?.setGravity(Gravity.BOTTOM)
-
-
     }
 
     override fun onDestroyView() {
