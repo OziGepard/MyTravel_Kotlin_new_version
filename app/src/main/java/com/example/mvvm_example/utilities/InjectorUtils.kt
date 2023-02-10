@@ -2,17 +2,16 @@ package com.example.mvvm_example.utilities
 
 import com.example.mvvm_example.data.FireBaseDB
 import com.example.mvvm_example.data.RoomsPeopleDao
-import com.example.mvvm_example.data.TravelRepository
-import com.example.mvvm_example.ui.HomeFragmentViewModel
+import com.example.mvvm_example.data.PlaceRepository
 import com.example.mvvm_example.ui.HomeFragmentViewModelFactory
-import com.example.mvvm_example.ui.TravelViewModelFactory
+import com.example.mvvm_example.ui.PlaceViewModelFactory
 
 object InjectorUtils {
 
-    fun provideTravelViewModelFactory(): TravelViewModelFactory
+    fun providePlaceViewModelFactory(): PlaceViewModelFactory
     {
-        val travelRepository = TravelRepository.getInstance(FireBaseDB.getInstance().travelDao)
-        return TravelViewModelFactory(travelRepository)
+        val placeRepository = PlaceRepository.getInstance(FireBaseDB.getInstance().placeDao)
+        return PlaceViewModelFactory(placeRepository)
     }
 
     fun provideRoomsPeopleViewModelFactory(): HomeFragmentViewModelFactory

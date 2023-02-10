@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.util.Pair
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.mvvm_example.R
 import com.example.mvvm_example.data.HomeFragmentFunctions
 import com.example.mvvm_example.databinding.FragmentHomeBinding
@@ -38,6 +39,7 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
     private var dialog: Dialog? = null
     private var calendar: MaterialDatePicker<Pair<Long, Long>>? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,6 +51,7 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         initializeUI()
     }
 
@@ -59,15 +62,16 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
         val locale = Locale("pl", "PL")
         Locale.setDefault(locale)
 
+        //-------ViewModel dla HomeFragment----------
         val factory = InjectorUtils.provideRoomsPeopleViewModelFactory()
         viewModel = ViewModelProvider(this, factory)
             .get(HomeFragmentViewModel::class.java)
 
 
-
         searchTravel.setOnClickListener {
             showSearchFragment(activity)
         }
+
 
         dateRange.setOnClickListener {
 
@@ -95,6 +99,7 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
             }
             dialog?.show()
         }
+
     }
 
     override fun onClick(view: View?) {
@@ -144,8 +149,6 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
         buttonDecAdult?.setOnClickListener(this@HomeFragment)
         buttonIncKid?.setOnClickListener(this@HomeFragment)
         buttonDecKid?.setOnClickListener(this@HomeFragment)
-
-
     }
 
     override fun onDestroyView() {

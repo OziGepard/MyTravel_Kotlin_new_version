@@ -1,24 +1,11 @@
 package com.example.mvvm_example.ui.activity
 
-import android.os.Binder
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm_example.R
-import com.example.mvvm_example.data.FirebaseCallback
-import com.example.mvvm_example.data.Travel
-import com.example.mvvm_example.data.TravelAdapter
 import com.example.mvvm_example.databinding.ActivityTravelBinding
-import com.example.mvvm_example.ui.TravelViewModel
-import com.example.mvvm_example.utilities.InjectorUtils
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import org.checkerframework.common.subtyping.qual.Bottom
 
 
 class TravelActivity : AppCompatActivity() {

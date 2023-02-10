@@ -3,7 +3,7 @@ package com.example.mvvm_example.data
 
 class FireBaseDB private constructor() {
 
-    var travelDao = TravelDao()
+    var placeDao = PlaceDao()
         private set
 
     companion object{

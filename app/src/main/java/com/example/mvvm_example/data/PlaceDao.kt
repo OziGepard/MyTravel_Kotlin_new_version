@@ -3,31 +3,31 @@ package com.example.mvvm_example.data
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 
-class TravelDao {
+class PlaceDao {
 
     private var db : FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val travelsList = mutableListOf<Travel>()
+    private val placesList = mutableListOf<Place>()
     val TAG = "TravelDao"
 
 
     fun getTravels(firebaseCallback: FirebaseCallback)
     {
-        travelsList.clear()
+        placesList.clear()
 
-        db.collection("travels")
+        db.collection("available_places")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d(TAG, "${document.id} => ${document.data}")
                     var city = document.get("city").toString()
-                    var title = document.get("title").toString()
-                    var price = document.get("price").toString().toInt()
-                    val travel = Travel(city, title, price)
+                    var country = document.get("country").toString()
 
-                    travelsList.add(travel)
+                    val places = Place(city, country)
+
+                    placesList.add(places)
                 }
-                firebaseCallback.onCallback(travelsList as List<Travel>)
-                Log.d(TAG, "$travelsList")
+                firebaseCallback.onCallback(placesList)
+                Log.d(TAG, "$placesList")
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
