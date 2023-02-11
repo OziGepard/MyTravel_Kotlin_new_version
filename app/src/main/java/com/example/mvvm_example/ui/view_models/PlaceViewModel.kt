@@ -1,21 +1,21 @@
-package com.example.mvvm_example.ui
+package com.example.mvvm_example.ui.view_models
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mvvm_example.data.*
+import com.example.mvvm_example.data.Place
+import com.example.mvvm_example.data.PlaceRepository
 import java.util.*
 
 class PlaceViewModel(
 
-    private val placeRepository: PlaceRepository)
+    private val placeRepository: PlaceRepository
+)
     :ViewModel(){
 
     private val TAG = "PlaceViewModel"
 
 
-    fun getPlaces(callback: FirebaseCallback) = placeRepository.getPlaces(callback)
+    fun getPlaces(callback: FirebaseCallbackPlace) = placeRepository.getPlaces(callback)
 
     fun getSpecificPlaces(listOfPlaces: List<Place>, textInput: String): List<Place> {
         val editedText = textInput

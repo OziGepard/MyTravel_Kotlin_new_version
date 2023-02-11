@@ -10,12 +10,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mvvm_example.data.FirebaseCallback
+import com.example.mvvm_example.data.FirebaseCallbackPlace
 import com.example.mvvm_example.data.Place
 import com.example.mvvm_example.data.PlaceAdapter
 import com.example.mvvm_example.databinding.FragmentSearchBinding
-import com.example.mvvm_example.ui.PlaceViewModel
+import com.example.mvvm_example.ui.view_models.PlaceViewModel
 import com.example.mvvm_example.utilities.InjectorUtils
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class SearchFragment : Fragment() {
@@ -24,7 +26,7 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: PlaceAdapter
-    private var placesList: MutableList<Place> = mutableListOf()
+    private var placesList: List<Place> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,12 +60,14 @@ class SearchFragment : Fragment() {
         registerForContextMenu(recyclerView)
 
         //------Pobranie danych o wycieczkach z bazy danych------------
-        viewModel.getPlaces(object : FirebaseCallback {
-            override fun onCallback(list: MutableList<Place>) {
 
-                placesList = list
-            }
-        })
+        GlobalScope.launch {
+            viewModel.getPlaces(object : FirebaseCallbackPlace {
+                override fun onCallbackPlace(list: List<Place>) {
+                    placesList = list
+                }
+            })
+        }
 
 
         //--------Nasłuchiwanie zmian w polu tekstowym---------

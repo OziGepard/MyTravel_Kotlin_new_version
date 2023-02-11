@@ -1,9 +1,14 @@
 package com.example.mvvm_example.data
 
+import com.example.mvvm_example.data.offerElements.OfferDao
+
 
 class FireBaseDB private constructor() {
 
     var placeDao = PlaceDao()
+        private set
+
+    var offerDao = OfferDao()
         private set
 
     companion object{

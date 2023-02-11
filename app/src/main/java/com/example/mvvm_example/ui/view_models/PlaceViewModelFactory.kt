@@ -1,14 +1,14 @@
-package com.example.mvvm_example.ui
+package com.example.mvvm_example.ui.view_models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.mvvm_example.data.RoomsPeopleDao
+import com.example.mvvm_example.data.PlaceRepository
 
-class HomeFragmentViewModelFactory(private val roomsPeople : RoomsPeopleDao)
+class PlaceViewModelFactory(private val placeRepository: PlaceRepository)
     : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return HomeFragmentViewModel(roomsPeople) as T
+        return PlaceViewModel(placeRepository) as T
     }
 }

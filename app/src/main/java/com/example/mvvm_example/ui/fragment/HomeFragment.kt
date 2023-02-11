@@ -1,25 +1,29 @@
 package com.example.mvvm_example.ui.fragment
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.util.Pair
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mvvm_example.R
 import com.example.mvvm_example.data.HomeFragmentFunctions
+import com.example.mvvm_example.data.Place
 import com.example.mvvm_example.databinding.FragmentHomeBinding
-import com.example.mvvm_example.ui.HomeFragmentViewModel
+import com.example.mvvm_example.ui.view_models.HomeFragmentViewModel
+import com.example.mvvm_example.ui.activity.OffersActivity
 import com.example.mvvm_example.utilities.InjectorUtils
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
 class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
@@ -32,6 +36,7 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
     private lateinit var dateRange: TextInputEditText
     private lateinit var searchTravel: TextInputEditText
     private lateinit var viewModel: HomeFragmentViewModel
+    private lateinit var searchButton : Button
 
     private var textRoom: TextView? = null
     private var textAdult: TextView? = null
@@ -60,6 +65,8 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
         peopleAndRooms = binding.peopleTravel
         dateRange = binding.dateRangeTravel
         searchTravel = binding.searchTravel
+        searchButton = binding.searchButtonTravel
+
         val locale = Locale("pl", "PL")
         Locale.setDefault(locale)
 
@@ -79,6 +86,9 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
             calendar = calendar ?: showDateRangeDialog()
             calendar!!.addOnPositiveButtonClickListener {
                 dateRange.setText(calendar!!.headerText)
+
+                viewModel.dateSelected = calendar!!.selection
+                viewModel.readyToSearch[1] = true
             }
 
             calendar!!.show(
@@ -98,13 +108,32 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
                     peopleAndRooms.setText(viewModel.getRoomsPeopleText())
                 }
             }
+
             dialog?.show()
+        }
+
+        searchButton.setOnClickListener{
+            var db : FirebaseFirestore = FirebaseFirestore.getInstance()
+
+            if(viewModel.isReadyToSearch())
+            {
+                val intent = Intent(context, OffersActivity::class.java)
+
+                intent.putExtra("peopleAndRooms", viewModel.getRoomsPeople())
+                intent.putExtra("placeSelected", viewModel.placeSelected)
+                intent.putExtra("dateFirst", viewModel.dateSelected!!.first)
+                intent.putExtra("dateSecond", viewModel.dateSelected!!.second)
+                startActivity(intent)
+            }
+            else
+            {
+                Toast.makeText(context, "Uzupełnij brakujące dane", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
 
     override fun onClick(view: View?) {
-        Log.d(TAG, "ON CLICK: $viewModel")
         when (view?.id) {
             R.id.button_inc_room -> {
                 viewModel.setRoomsPeople("Room" to 1)
@@ -163,7 +192,12 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
         {
             val country = args.placeData!!.country
             val city = args.placeData!!.city
+            val placeSelected = Place(city,country)
+
+            viewModel.placeSelected = placeSelected
+
             searchTravel.setText("$city, $country")
+            viewModel.readyToSearch[0] = true
         }
     }
 }

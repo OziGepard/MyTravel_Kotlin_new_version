@@ -1,20 +1,13 @@
 package com.example.mvvm_example.data
 
-import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.ViewModelProvider
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm_example.R
-import com.example.mvvm_example.ui.PlaceViewModel
 import com.example.mvvm_example.ui.fragment.SearchFragment
-import com.example.mvvm_example.utilities.InjectorUtils
 
 class PlaceAdapter(val searchFragment : SearchFragment, var dataList : List<Place>) :
     RecyclerView.Adapter<MyViewHolder>() {

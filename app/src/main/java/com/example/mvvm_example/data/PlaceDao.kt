@@ -6,13 +6,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 class PlaceDao {
 
     private var db : FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val placesList = mutableListOf<Place>()
+    private var placesList = listOf<Place>()
     val TAG = "TravelDao"
 
 
-    fun getTravels(firebaseCallback: FirebaseCallback)
+    fun getPlaces(firebaseCallbackPlace: FirebaseCallbackPlace)
     {
-        placesList.clear()
+        val tempPlaceList = mutableListOf<Place>()
 
         db.collection("available_places")
             .get()
@@ -24,9 +24,10 @@ class PlaceDao {
 
                     val places = Place(city, country)
 
-                    placesList.add(places)
+                    tempPlaceList.add(places)
                 }
-                firebaseCallback.onCallback(placesList)
+                placesList = tempPlaceList
+                firebaseCallbackPlace.onCallbackPlace(placesList)
                 Log.d(TAG, "$placesList")
             }
             .addOnFailureListener { exception ->
