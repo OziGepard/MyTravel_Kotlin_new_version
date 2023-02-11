@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.mvvm_example.R
+import com.example.mvvm_example.ui.fragment.HomeFragmentDirections
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -22,25 +23,6 @@ import java.util.*
 interface HomeFragmentFunctions {
     private val calendar: Calendar
         get() = Calendar.getInstance()
-
-    private val navOptions: NavOptions
-        get() = NavOptions.Builder()
-        .setExitAnim(R.anim.from_right_to_left_faster)
-        .setEnterAnim(R.anim.from_right_to_left)
-        .setPopEnterAnim(R.anim.from_left_to_right_pop)
-        .setPopExitAnim(R.anim.from_left_to_right_pop_faster)
-        .build()
-
-    fun showSearchFragment(activity : FragmentActivity?) {
-        val navHostFragment = activity?.supportFragmentManager?.findFragmentById(R.id.fragment)
-        val navController = navHostFragment?.findNavController()
-
-        navController?.navigate(
-            R.id.searchFragment,
-            null,
-            navOptions,
-            null)
-    }
 
     fun showDateRangeDialog(): MaterialDatePicker<Pair<Long, Long>> {
         val startFrom = calendar.timeInMillis

@@ -36,8 +36,8 @@ class PlaceAdapter(val searchFragment : SearchFragment, var dataList : List<Plac
         holder.placeCity.text = city
 
         holder.placeLayout.setOnClickListener {
-            val place = Place(country, city)
-            searchFragment.selectedItem(place)
+            val placeSelected = Place(city, country)
+            searchFragment.selectedItem(placeSelected)
         }
     }
 

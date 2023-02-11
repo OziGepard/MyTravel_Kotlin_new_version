@@ -4,17 +4,17 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/baseline_home_24"
-        android:title="Home"
+        android:title="@string/start_menu"
         />
     <item
         android:id="@+id/reservationFragment"
         android:icon="@drawable/baseline_reservation_24"
-        android:title="Reservation"
+        android:title="@string/rezerwacje_menu"
         />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/baseline_profile_24"
-        android:title="Profile"
+        android:title="@string/profil_menu"
         />
 
 </menu>

@@ -20,7 +20,7 @@
             android:id="@+id/search_text_travel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Podaj miejsce wyjazdu"
+            android:hint="@string/search_enter_place"
             android:inputType="textCapSentences"
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>

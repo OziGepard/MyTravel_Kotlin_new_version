@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.util.Pair
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mvvm_example.R
 import com.example.mvvm_example.data.HomeFragmentFunctions
@@ -39,6 +40,7 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
     private var dialog: Dialog? = null
     private var calendar: MaterialDatePicker<Pair<Long, Long>>? = null
 
+    private val args : HomeFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +52,6 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         initializeUI()
     }
@@ -69,9 +70,9 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
 
 
         searchTravel.setOnClickListener {
-            showSearchFragment(activity)
+            val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
+            findNavController().navigate(action)
         }
-
 
         dateRange.setOnClickListener {
 
@@ -154,5 +155,15 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(args.placeData != null)
+        {
+            val country = args.placeData!!.country
+            val city = args.placeData!!.city
+            searchTravel.setText("$city, $country")
+        }
     }
 }

@@ -85,7 +85,7 @@ class SearchFragment : Fragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                
+
             }
 
         })
@@ -94,5 +94,7 @@ class SearchFragment : Fragment() {
 
     fun selectedItem(place: Place)
     {
+        val action = SearchFragmentDirections.actionSearchFragmentToHomeFragment().setPlaceData(place)
+        findNavController().navigate(action)
     }
 }

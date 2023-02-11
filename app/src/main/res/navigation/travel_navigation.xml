@@ -12,7 +12,16 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/from_right_to_left"
+            app:exitAnim="@anim/from_right_to_left_faster"
+            app:popEnterAnim="@anim/from_left_to_right_pop"
+            app:popExitAnim="@anim/from_left_to_right_pop_faster" />
+        <argument
+            android:name="placeData"
+            app:argType="com.example.mvvm_example.data.Place"
+            android:defaultValue="@null"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -28,5 +37,9 @@
         android:id="@+id/searchFragment"
         android:name="com.example.mvvm_example.ui.fragment.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>
