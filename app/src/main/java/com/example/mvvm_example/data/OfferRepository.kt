@@ -1,4 +1,4 @@
-package com.example.mvvm_example.data.offerElements
+package com.example.mvvm_example.data
 
 
 class OfferRepository private constructor(private val offerDao: OfferDao) {

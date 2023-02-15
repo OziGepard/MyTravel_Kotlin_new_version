@@ -47,6 +47,16 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
 
     private val args : HomeFragmentArgs by navArgs()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        //-------ViewModel dla HomeFragment----------
+        val factory = InjectorUtils.provideRoomsPeopleViewModelFactory()
+        viewModel = ViewModelProvider(this, factory)
+            .get(HomeFragmentViewModel::class.java)
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,11 +79,6 @@ class HomeFragment : Fragment(), HomeFragmentFunctions, View.OnClickListener {
 
         val locale = Locale("pl", "PL")
         Locale.setDefault(locale)
-
-        //-------ViewModel dla HomeFragment----------
-        val factory = InjectorUtils.provideRoomsPeopleViewModelFactory()
-        viewModel = ViewModelProvider(this, factory)
-            .get(HomeFragmentViewModel::class.java)
 
 
         searchTravel.setOnClickListener {

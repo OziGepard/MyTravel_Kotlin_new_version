@@ -3,9 +3,9 @@ package com.example.mvvm_example.ui.view_models
 import android.os.Build
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
-import com.example.mvvm_example.data.offerElements.FirebaseCallbackOffer
-import com.example.mvvm_example.data.offerElements.OfferData
-import com.example.mvvm_example.data.offerElements.OfferRepository
+import com.example.mvvm_example.data.FirebaseCallbackOffer
+import com.example.mvvm_example.data.OfferData
+import com.example.mvvm_example.data.OfferRepository
 import com.example.mvvm_example.data.Place
 
 class OfferViewModel(private val offerRepository: OfferRepository)
@@ -14,7 +14,7 @@ class OfferViewModel(private val offerRepository: OfferRepository)
     var bundleFromActivity : Bundle? = null
     lateinit var peopleAndRooms: ArrayList<Int>
     lateinit var placeSelected: Place
-    lateinit var offersList: List<OfferData>
+    var offersList: List<OfferData> = listOf()
     var dateFirst: Long? = null
     var dateSecond: Long? = null
 

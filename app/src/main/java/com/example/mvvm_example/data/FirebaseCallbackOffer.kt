@@ -1,4 +1,4 @@
-package com.example.mvvm_example.data.offerElements
+package com.example.mvvm_example.data
 
 interface FirebaseCallbackOffer {
 

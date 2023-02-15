@@ -1,7 +1,5 @@
 package com.example.mvvm_example.data
 
-import com.example.mvvm_example.data.offerElements.OfferDao
-
 
 class FireBaseDB private constructor() {
 

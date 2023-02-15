@@ -16,6 +16,7 @@ import com.example.mvvm_example.data.PlaceAdapter
 import com.example.mvvm_example.databinding.FragmentSearchBinding
 import com.example.mvvm_example.ui.view_models.PlaceViewModel
 import com.example.mvvm_example.utilities.InjectorUtils
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -61,13 +62,11 @@ class SearchFragment : Fragment() {
 
         //------Pobranie danych o wycieczkach z bazy danych------------
 
-        GlobalScope.launch {
-            viewModel.getPlaces(object : FirebaseCallbackPlace {
-                override fun onCallbackPlace(list: List<Place>) {
-                    placesList = list
-                }
-            })
-        }
+        viewModel.getPlaces(object : FirebaseCallbackPlace {
+            override fun onCallbackPlace(list: List<Place>) {
+                placesList = list
+            }
+        })
 
 
         //--------Nasłuchiwanie zmian w polu tekstowym---------
